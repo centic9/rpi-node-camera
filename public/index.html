@@ -1,0 +1,18 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Raspberry Pi Camera</title>
+</head>
+<body>
+    <img src="camera.jpg" />
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        var socket = io.connect('http://localhost:3000');
+        socket.on('camera', function (data) {
+            console.log(data);
+        });
+    </script>
+</body>
+</html>

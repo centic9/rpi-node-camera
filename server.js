@@ -15,16 +15,15 @@ app.get('/camera.jpg', function (req, res) {
 });
 
 io.sockets.on('connection', function (socket) {
-    fs.stat(imageFullPath, function (err, stats) {
-        socket.emit('modified', { time: stats.mtime });
-    });
-
-    fs.watch(imagePath, function () {
+    function emitDate() {
         fs.stat(imageFullPath, function (err, stats) {
-            socket.emit('camera', { status: 'updated' });
             socket.emit('modified', { time: stats.mtime });
         });
-    });
+    }
+
+    fs.watch(imagePath, emitDate);
+
+    emitDate();
 });
 
 server.listen(3000);

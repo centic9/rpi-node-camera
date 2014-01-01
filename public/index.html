@@ -5,22 +5,23 @@
     <title>Raspberry Pi Camera</title>
 </head>
 <body>
-    <img src="camera.jpg" id="image" />
+    <img id="image" />
     <div id="modified"></div>
 
     <script src="/socket.io/socket.io.js"></script>
     <script>
         var socket = io.connect('http://raspbmc:3000');
 
-        socket.on('camera', function (data) {
-            console.log('Updating image');
+        function refreshImage() {
             document.getElementById('image').src = 'camera.jpg?' + new Date().getTime();
-        });
+            document.getElementById('modified').innerHTML = 'Last modified: ' + new Date(data.time).toLocaleString();
+        }
 
         socket.on('modified', function (data) {
-            console.log('Updating time');
-            document.getElementById('modified').innerHTML = new Date(data.time).toLocaleString();
+            refreshImage();
         });
+
+        refreshImage();
     </script>
 </body>
 </html>

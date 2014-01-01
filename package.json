@@ -1,0 +1,14 @@
+{
+  "name": "camera",
+  "version": "0.0.1",
+  "description": "Get data form raspberry pi camera",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Mikael Soderstrom <mikael.soderstrom@live.se>",
+  "license": "BSD-2-Clause",
+  "devDependencies": {
+    "bower": "~1.2.8"
+  }
+}

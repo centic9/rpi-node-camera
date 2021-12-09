@@ -4,8 +4,8 @@ var server = require('http').createServer(app);
 var io = require('socket.io').listen(server, { log: false });
 var fs = require('fs');
 
-var imagePath = '/home/pi/camera';
-var imageFullPath = imagePath + '/surveillance.jpeg';
+var imagePath = '/tmp';
+var imageFullPath = imagePath + '/test.jpg';
 
 app.set('view options', { layout: false });
 app.use(express.static(__dirname + '/public'));

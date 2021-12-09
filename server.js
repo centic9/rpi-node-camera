@@ -1,8 +1,8 @@
 ﻿var express = require('express');
 var app = express();
 var server = require('http').createServer(app);
-var io = require('socket.io').listen(server, { log: false });
-var fs = require('fs');
+
+const { exec } = require('child_process');
 
 var imagePath = '/tmp';
 var imageFullPath = imagePath + '/test.jpg';
@@ -11,19 +11,16 @@ app.set('view options', { layout: false });
 app.use(express.static(__dirname + '/public'));
 
 app.get('/camera.jpg', function (req, res) {
-    res.sendfile(imageFullPath);
-});
+    exec('libcamera-jpeg -o /tmp/camera.jpg', (error, stdout, stderr) => {
+        if (error) {
+	    console.error(`exec error: ${error}`);
+            return;
+       }
+       console.log(`stdout: ${stdout}`);
+       console.error(`stderr: ${stderr}`);
 
-io.sockets.on('connection', function (socket) {
-    function emitDate() {
-        fs.stat(imageFullPath, function (err, stats) {
-            socket.emit('modified', { time: stats.mtime });
-        });
-    }
-
-    fs.watch(imagePath, emitDate);
-
-    emitDate();
+       res.sendfile(imageFullPath);
+   });
 });
 
 server.listen(3000);

@@ -11,6 +11,6 @@
   "license": "BSD-2-Clause",
   "repository": "https://github.com/MikaelSoderstrom/rpi-node-camera",
   "devDependencies": {
-    "express": "~3.4.7",
+    "express": "~3.4.7"
   }
 }

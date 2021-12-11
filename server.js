@@ -4,14 +4,13 @@ var server = require('http').createServer(app);
 
 const { exec } = require('child_process');
 
-var imagePath = '/tmp';
-var imageFullPath = imagePath + '/test.jpg';
+var imagePath = '/tmp/camera.jpg';
 
 app.set('view options', { layout: false });
 app.use(express.static(__dirname + '/public'));
 
 app.get('/camera.jpg', function (req, res) {
-    exec('libcamera-jpeg -o /tmp/camera.jpg', (error, stdout, stderr) => {
+    exec('libcamera-jpeg -o ' + imagePath + ' -t 1 -n', (error, stdout, stderr) => {
         if (error) {
 	    console.error(`exec error: ${error}`);
             return;
@@ -19,7 +18,7 @@ app.get('/camera.jpg', function (req, res) {
        console.log(`stdout: ${stdout}`);
        console.error(`stderr: ${stderr}`);
 
-       res.sendfile(imageFullPath);
+       res.sendfile(imagePath);
    });
 });
 

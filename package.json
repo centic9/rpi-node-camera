@@ -1,16 +1,16 @@
 {
   "name": "camera",
-  "version": "0.0.1",
-  "description": "Get data form raspberry pi camera",
+  "version": "0.0.2",
+  "description": "Provide a WebServer which provides images from the Raspberry Pi Camera",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
-  "author": "Mikael Soderstrom <mikael.soderstrom@live.se>",
+  "author": "Dominik Stadler <dominik.stadler@gmx.at> based on work from Mikael Soderstrom <mikael.soderstrom@live.se>",
   "license": "BSD-2-Clause",
   "repository": "https://github.com/MikaelSoderstrom/rpi-node-camera",
-  "devDependencies": {
+  "dependencies": {
     "express": "~3.4.7"
   }
 }
